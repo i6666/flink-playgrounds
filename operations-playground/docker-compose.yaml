@@ -69,5 +69,25 @@ services:
     ports:
       - 9092:9092
       - 9094:9094
+
+      
+  mysql:
+    image: mysql:5.7
+    command:  [
+      'mysqld',
+      '--innodb-buffer-pool-size=80M',
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci',
+      '--default-time-zone=+8:00',
+      '--lower-case-table-names=1'
+    ]
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    volumes:
+      - /Users/strong/data/mysql5.7/etc/my.cnf:/etc/my.cnf #配置映射
+      - /Users/strong/data/mysql5.7/data:/data
+
 volumes:
   flink_data:
